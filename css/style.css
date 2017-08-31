@@ -95,3 +95,15 @@ body {
 .quote-box .buttons .button#new-quote {
   float: right;
 }
+
+.hornyman {
+  width: 10vw;
+  outline: none;
+  font-size: 0.85em;
+  cursor: pointer;
+  position: absolute;
+  left: 50%;
+  margin-left: -5vw;
+  margin-top: 20vh;
+
+}
