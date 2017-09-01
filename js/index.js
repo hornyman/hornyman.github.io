@@ -3,11 +3,26 @@ function inIframe () { try { return window.self !== window.top; } catch (e) { re
 
 
 
-
+var currentQuotes = []
 var currentQuote = '', currentAuthor = '';
 function openURL(url){
   window.open(url, 'Share', 'width=550, height=400, toolbar=0, scrollbars=1 ,location=0 ,statusbar=0,menubar=0, resizable=0');
 }
+
+function findIndex(min, max) {
+  rand = Math.floor(Math.random() * (max - min)) + min;
+  if (currentQuotes.indexOf(rand) == -1) {
+    if (currentQuotes.length < 3) {
+      currentQuotes.push(rand);
+      return rand;
+    } else {
+      currentQuotes.splice(0, 1);
+      currentQuotes.push(rand);
+      return rand;
+    }
+  }
+}
+
 function getQuote() {
 
   $.ajax('/quotes.json', {
@@ -20,7 +35,9 @@ function getQuote() {
     length = obj.length
     min = Math.ceil(0);
     max = Math.floor(length);
-    rand = Math.floor(Math.random() * (max - min)) + min;
+    rand = findIndex(min, max);
+
+
 
     currentQuote = obj[rand].quote
     currentAuthor = obj[rand].author
